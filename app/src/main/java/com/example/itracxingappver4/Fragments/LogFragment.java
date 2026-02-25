@@ -52,7 +52,15 @@ public class LogFragment extends Fragment {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 1. 清空資料
                 LogManager.getInstance().clear();
+
+                // 2. 立即更新 UI，不要等 5 秒的 Runnable
+                List<String> emptyList = LogManager.getInstance().getAll();
+                adapter.updateData(emptyList);
+
+                // 3. 可選：手動通知 RecyclerView 回到頂部
+                recyclerView.scrollToPosition(0);
             }
         });
 
