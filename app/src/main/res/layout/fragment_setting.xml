@@ -92,13 +92,218 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!--區塊2: 上傳 → Title-->
+                <!--區塊2: MQTT → Title-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MQTT"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
+
+                <!--區塊2: MQTT → Username-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username: "
+                        android:textSize="14sp"/>
+                    <EditText
+                        android:id="@+id/fragment_setting_mqtt_edittext_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <!--區塊2: MQTT → Password-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Password: "
+                        android:textSize="14sp"/>
+                    <EditText
+                        android:id="@+id/fragment_setting_mqtt_edittext_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <!--區塊2: MQTT → State-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="State: "
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/fragment_setting_mqtt_textview_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text=".........."/>
+                </LinearLayout>
+
+                <!--區塊2: MQTT → 測試連線(Register)-->
+                <Button
+                    android:id="@+id/fragment_setting_mqtt_button_registertest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="測試連線(Register)"/>
+                <!--區塊2: MQTT → 註冊(Register)-->
+                <Button
+                    android:id="@+id/fragment_setting_mqtt_button_registerconn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="連線(Register)"/>
+                <!--區塊2: MQTT → 測試連線(ExchangeKey)-->
+                <Button
+                    android:id="@+id/fragment_setting_mqtt_button_exchangekeytest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="測試連線(ExchangeKey)"/>
+                <!--區塊2: MQTT → 交換金鑰(ExchangeKey)-->
+                <Button
+                    android:id="@+id/fragment_setting_mqtt_button_exchangekeyconn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="連線(ExchangeKey)"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!--區塊3: 金鑰儲存-->
+        <!--區塊3: 金鑰儲存 → 框線-->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="12dp"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!--區塊3: 金鑰儲存 → Title-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="金鑰儲存"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <!--區塊3: 金鑰儲存 → MLKEM -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MLKEM: "
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/fragment_setting_key_textview_mlkem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text=".........."/>
+                </LinearLayout>
+                <!--區塊3: 金鑰儲存 → NTRU-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NTRU: "
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/fragment_setting_key_textview_ntru"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text=".........."/>
+                </LinearLayout>
+                <!--區塊3: 金鑰儲存 → FALCON-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FALCON: "
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/fragment_setting_key_textview_falcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text=".........."/>
+                </LinearLayout>
+                <!--區塊3: 金鑰儲存 → AES-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8sp"
+                    android:layout_marginBottom="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AES: "
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/fragment_setting_key_textview_aes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text=".........."/>
+                </LinearLayout>
+                <!--區塊3: 金鑰儲存 → Button-->
+                <Button
+                    android:id="@+id/fragment_setting_key_button_mlkemreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="請求MLKEM金鑰"/>
+                <Button
+                    android:id="@+id/fragment_setting_key_button_ntrureq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="請求NTRU金鑰"/>
+                <Button
+                    android:id="@+id/fragment_setting_key_button_falconreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="請求FALCON金鑰"/>
+                <Button
+                    android:id="@+id/fragment_setting_key_button_aesreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="請求AES金鑰"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

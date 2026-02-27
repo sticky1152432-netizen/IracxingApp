@@ -45,4 +45,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     //bouncy castle
     implementation("org.bouncycastle:bcprov-jdk18on:1.83")
+    //Eclipse Paho
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 }

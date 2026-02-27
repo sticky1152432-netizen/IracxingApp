@@ -11,6 +11,7 @@ import com.example.itracxingappver4.Fragments.DatabaseFragment;
 import com.example.itracxingappver4.Fragments.LogFragment;
 import com.example.itracxingappver4.Fragments.LoraFragment;
 import com.example.itracxingappver4.Fragments.SettingFragment;
+import com.example.itracxingappver4.Fragments.TestFragment;
 import com.example.itracxingappver4.Fragments.UploadFragment;
 
 // ===========主類別===========
@@ -30,7 +31,7 @@ public class activity_main_viewpager_adapter extends FragmentStateAdapter {
             case 0: return new UploadFragment();
             case 1: return new DatabaseFragment();
             case 2: return new BluetoothFragment();
-            case 3: return new LoraFragment();
+            case 3: return new TestFragment();
             case 4: return new SettingFragment();
             case 5: return new LogFragment();
             default: return new BlankFragment();
