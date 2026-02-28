@@ -114,7 +114,8 @@
                     <EditText
                         android:id="@+id/fragment_setting_mqtt_edittext_username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:hint="測試用請勿填寫"/>
                 </LinearLayout>
 
                 <!--區塊2: MQTT → Password-->
@@ -131,7 +132,8 @@
                     <EditText
                         android:id="@+id/fragment_setting_mqtt_edittext_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:hint="測試用請勿填寫"/>
                 </LinearLayout>
 
                 <!--區塊2: MQTT → State-->
@@ -152,33 +154,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:text=".........."/>
+                        android:text="未連線"/>
                 </LinearLayout>
 
                 <!--區塊2: MQTT → 測試連線(Register)-->
                 <Button
-                    android:id="@+id/fragment_setting_mqtt_button_registertest"
+                    android:id="@+id/fragment_setting_mqtt_button_testconn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="測試連線(Register)"/>
-                <!--區塊2: MQTT → 註冊(Register)-->
+                <!--區塊2: MQTT → 連線(Register)-->
                 <Button
-                    android:id="@+id/fragment_setting_mqtt_button_registerconn"
+                    android:id="@+id/fragment_setting_mqtt_button_conn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="連線(Register)"/>
-                <!--區塊2: MQTT → 測試連線(ExchangeKey)-->
+                <!--區塊2: MQTT → 中斷連線(Register)-->
                 <Button
-                    android:id="@+id/fragment_setting_mqtt_button_exchangekeytest"
+                    android:id="@+id/fragment_setting_mqtt_button_stopconn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="測試連線(ExchangeKey)"/>
-                <!--區塊2: MQTT → 交換金鑰(ExchangeKey)-->
-                <Button
-                    android:id="@+id/fragment_setting_mqtt_button_exchangekeyconn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="連線(ExchangeKey)"/>
+                    android:text="中斷連線(Register)"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
