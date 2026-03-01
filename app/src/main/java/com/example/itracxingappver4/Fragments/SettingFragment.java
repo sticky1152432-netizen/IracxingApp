@@ -24,7 +24,7 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
-
+import android.provider.Settings;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -101,24 +101,35 @@ public class SettingFragment extends Fragment {
 
         final String finalUser = user;
 
+        // --- 新增：獲取設備唯一識別碼 (Android ID) ---
+        String androidId = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
         // 封裝 JSON
         String payload = "";
         try {
             JSONObject json = new JSONObject();
-            json.put("sender", finalUser);
+            json.put("sender", finalUser);      // 你原本的 MQTT 使用者名稱
+            json.put("device", androidId);     // 新增：設備唯一 ID (例如: 8df62c12...)
             json.put("to", "n8n");
             json.put("message", messageType);
+
+            // 為了對應你之前的 Flask/DB 配置，通常 source 建議用 androidId
+            // 如果你的資料庫 source 欄位想存手機名稱，可以視情況調整
+            json.put("source", androidId);
+
             payload = json.toString();
+            LogManager.getInstance().insert("MQTT -> 準備送出 JSON: " + payload);
         } catch (Exception e) {
             LogManager.getInstance().insert("MQTT -> JSON 封裝錯誤: " + e.getMessage());
         }
 
-        // 初始化 Helper
+        // 初始化 Helper 並執行
         MqttHelper helper = new MqttHelper(getContext(), user, pass);
         if (!isOneTime) {
-            persistentHelper = helper; // 保存引用以便之後中斷
+            persistentHelper = helper;
         }
 
+        // 注意：這裡我維持你原本的 Topic 邏輯，但建議 check topic 名稱是否符合你的 itracxing/register 規劃
         helper.connectAndDoAction("register/result", "register", payload, new MqttCallback() {
             @Override
             public void messageArrived(String topic, MqttMessage message) {
@@ -130,7 +141,7 @@ public class SettingFragment extends Fragment {
                         tvMqttState.setText(isOneTime ? result : "持續連線");
 
                         if (isOneTime) {
-                            LogManager.getInstance().insert("MQTT -> 一次性任務完成，釋放連線");
+                            LogManager.getInstance().insert("MQTT -> 任務完成，斷開測試連線");
                             helper.disconnect();
                         }
                     });
@@ -139,7 +150,7 @@ public class SettingFragment extends Fragment {
 
             @Override
             public void connectionLost(Throwable cause) {
-                LogManager.getInstance().insert("MQTT -> 連線意外丟失: " + (cause != null ? cause.getMessage() : "原因未知"));
+                LogManager.getInstance().insert("MQTT -> 連線丟失: " + (cause != null ? cause.getMessage() : "未知"));
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> tvMqttState.setText("連線中斷"));
                 }
