@@ -124,7 +124,7 @@ public class Bluetooth {
                 ).format(new Date());
 
                 // ===========建立DeviceModel===========
-                DeviceModel device = new DeviceModel(mac, rawHex, timestamp);
+                DeviceModel device = new DeviceModel(mac,name, rawHex, timestamp);
                 results.add(device);
 
                 // ===========Log===========

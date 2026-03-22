@@ -16,7 +16,7 @@ public class SQLite extends SQLiteOpenHelper {
 
     // ===========宣告常數===========
     private static final String DB_NAME    = "itracxing.db";
-    private static final int    DB_VERSION = 1;
+    private static final int    DB_VERSION = 2;
 
     // - 資料表
     private static final String TABLE_DEVICE = "device";
@@ -26,6 +26,7 @@ public class SQLite extends SQLiteOpenHelper {
     private static final String COL_MAC       = "device_mac";
     private static final String COL_RAWDATA   = "device_rawdata";
     private static final String COL_TIMESTAMP = "timestamp";
+    private static final String COL_NAME      = "device_name"; // 新增
 
     // ===========單例===========
     private static SQLite instance;
@@ -49,6 +50,7 @@ public class SQLite extends SQLiteOpenHelper {
         String sql = "CREATE TABLE " + TABLE_DEVICE + " ("
                 + COL_ID        + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL_MAC       + " TEXT, "
+                + COL_NAME      + " TEXT, "
                 + COL_RAWDATA   + " TEXT, "
                 + COL_TIMESTAMP + " TEXT"
                 + ")";
@@ -72,6 +74,7 @@ public class SQLite extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_MAC,       device.getDeviceMac());
+        cv.put(COL_NAME,      device.getDeviceName()); // 新增
         cv.put(COL_RAWDATA,   device.getDeviceRawData());
         cv.put(COL_TIMESTAMP, device.getTimestamp());
         long rowId = db.insert(TABLE_DEVICE, null, cv);
@@ -114,7 +117,8 @@ public class SQLite extends SQLiteOpenHelper {
             String mac       = cursor.getString(cursor.getColumnIndexOrThrow(COL_MAC));
             String rawData   = cursor.getString(cursor.getColumnIndexOrThrow(COL_RAWDATA));
             String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(COL_TIMESTAMP));
-            list.add(new DeviceModel(id, mac, rawData, timestamp));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME));
+            list.add(new DeviceModel(id, mac, name, rawData, timestamp));
         }
         cursor.close();
         LogManager.getInstance().insert("SQLite -> 查詢全部, 筆數: " + list.size());
@@ -137,7 +141,8 @@ public class SQLite extends SQLiteOpenHelper {
             long id = cursor.getLong(cursor.getColumnIndexOrThrow(COL_ID));
             String rawData   = cursor.getString(cursor.getColumnIndexOrThrow(COL_RAWDATA));
             String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(COL_TIMESTAMP));
-            list.add(new DeviceModel(id, mac, rawData, timestamp));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME));
+            list.add(new DeviceModel(id, mac, name, rawData, timestamp));
         }
         cursor.close();
         LogManager.getInstance().insert("SQLite -> 查詢 MAC: " + mac + ", 筆數: " + list.size());

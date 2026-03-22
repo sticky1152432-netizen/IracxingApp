@@ -45,6 +45,13 @@ public class fragment_bluetooth_recyclerview_adapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DeviceModel device = deviceList.get(position);
+        // 裝置名稱: 若為 null 或 Unknown 則顯示提示
+        String name = device.getDeviceName();
+        if (name != null && !name.equals("Unknown")) {
+            holder.name.setText("名稱: " + name);
+        } else {
+            holder.name.setText("名稱: (無)");
+        }
         holder.mac.setText("MAC: " + device.getDeviceMac());
         holder.rawData.setText("封包: " + device.getDeviceRawData());
         holder.timestamp.setText("時間: " + device.getTimestamp());
@@ -58,10 +65,11 @@ public class fragment_bluetooth_recyclerview_adapter
 
     // ===========ViewHolder===========
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView  mac, rawData, timestamp;
+        TextView name, mac, rawData, timestamp; // 新增 name
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            name      = itemView.findViewById(R.id.item_device_name); // 新增
             mac       = itemView.findViewById(R.id.item_device_mac);
             rawData   = itemView.findViewById(R.id.item_device_rawdata);
             timestamp = itemView.findViewById(R.id.item_device_timestamp);

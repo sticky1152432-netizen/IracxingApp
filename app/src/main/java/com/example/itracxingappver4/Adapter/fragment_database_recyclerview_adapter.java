@@ -53,6 +53,8 @@ public class fragment_database_recyclerview_adapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DeviceModel device = deviceList.get(position);
+        String name = device.getDeviceName();
+        holder.name.setText("名稱: " + (name != null && !name.equals("Unknown") ? name : "(無)")); // 新增
         holder.mac.setText("MAC: "    + device.getDeviceMac());
         holder.rawData.setText("封包: " + device.getDeviceRawData());
         holder.timestamp.setText("時間: " + device.getTimestamp());
@@ -76,6 +78,7 @@ public class fragment_database_recyclerview_adapter
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            name      = itemView.findViewById(R.id.item_device_name); // 新增
             mac       = itemView.findViewById(R.id.item_device_mac);
             rawData   = itemView.findViewById(R.id.item_device_rawdata);
             timestamp = itemView.findViewById(R.id.item_device_timestamp);
